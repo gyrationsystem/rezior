@@ -130,7 +130,7 @@ You can render UML diagrams using [Mermaid](https://mermaidjs.github.io/). For e
 
 ```mermaid
 sequenceDiagram
-Alice ->> Bob: Hello Bob, how are you?
+Alice -->> Bob: Hello Bob, how are you?
 Bob-->>John: How about you John?
 Bob--x Alice: I am good thanks!
 Bob-x John: I am good thanks!
@@ -150,5 +150,6 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMj
+QzNDU5Nl19
 -->
