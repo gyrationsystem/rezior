@@ -1,4 +1,4 @@
-Rakesh kumar sinha
+Rakesh kumar singh
 
     curl -X POST '/access_token' \
     -H 'Content-Type: application/json' \
@@ -150,5 +150,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkyMjQzNDU5Nl19
+eyJoaXN0b3J5IjpbNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
 -->
