@@ -1,155 +1,155 @@
-Rakesh kumar singh
+## Manufacturer Getting Started Guide
 
-    curl -X POST '/access_token' \
-    -H 'Content-Type: application/json' \
-    -H 'x-api-key: ACCESS_KEY' \
+Authorized Partner APIs allow the ability to connect to the TCB from your internal systems so that you can directly deposit and manage an 8112 offer into a manufacturer’s TCB account and retrieve redemption data. APIs are NOT required for a Authorized Partner to perform your functions as they relate to The Coupon Bureau, these APIs are designed specifically for partners who are looking to integrate these functions into your own system.
+
+## Step #1 : Get Access Token
+
+{
+    curl -X POST '/access_token' \   
+    -H 'Content-Type: application/json' \ 
+    -H 'x-api-key: ACCESS_KEY' \ 
     --data '{ 
-        "access_key": "ACCESS_KEY", 
-        "secret_key": "SECRET_KEY" 
-    }'
+    "access_key": "ACCESS_KEY", 
+   "secret_key": "SECRET_KEY" 
+     }
+    }
 
-sdzr code here`t to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
+The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs.
 
+## Step #2 : Get Connected Manufacturers
 
-# Files
+Required in step #3 where you will create master offer file on behalf of one manufacturer.
 
-StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible **offline!**
+{
+    curl -X GET '/manufacturer_agent/manufacturers' \ 
+    -H 'Content-Type: application/json' \ 
+    -H 'x-api-key: ACCESS_KEY' \ 
+    -H 'x-access-token: ACCESS_TOKEN' 
+            
+    }
 
-## Create files and folders
+You can cache the response of this API call as there will be no change in response until and unless another manufacturer authorizes the same Authorized Partner. Once you cache it, you can skip step #2 while creating a master offer file.
 
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
+## Step #3 : Create Master Offer File for a Manufacturer
 
-## Switch to another file
+{
+curl -X POST '/manufacturer/base_gs1?email_domain=<MANUFACTURER_EMAIL_DOMAIN>' \ 
+-H 'Content-Type: application/json' \ 
+-H 'x-api-key: ACCESS_KEY' \ 
+-H 'x-access-token: ACCESS_TOKEN' \ 
+--data '{
+    "data":{
+        "base_gs1":"8112010031493140188",
+        "brand_id":"XYZ",
+        "description":"50% off ",
+        "campaign_start_time":"04/21/2020",
+        "campaign_end_time":"04/30/2020",
+        "redemption_start_time":"04/22/2020",
+        "redemption_end_time":"04/30/2020",
+        "total_circulation":"100",
+        "primary_purchase_save_value":"1",
+        "primary_purchase_requirements":"1",
+        "primary_purchase_req_code":"1",
+        "primary_purchase_gtins":[
+            "294239749273","2390843209"
+            ],
+        "additional_purchase_rules_code":"",
+        "second_purchase_requirements":"",
+        "second_purchase_gs1_company_prefix":"",
+        "second_purchase_req_code":"",
+        "second_purchase_gtins":[
+            ""
+            ],
+        "third_purchase_requirements":"",
+        "third_purchase_gs1_company_prefix":"",
+        "third_purchase_req_code":"",
+        "third_purchase_gtins":[
+            ""
+            ],
+        "gln":"",
+        "save_value_code":"1",
+        "applies_to_which_item":"",
+        "store_coupon":"1",
+        "donot_multiply_flag":""
+    }
+}'
+            
+    }
 
-All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
+Once the master offer file is created, you can use the below API call to manage the master offer files.
 
-## Rename a file
+Assign / Unassign provider to master offer file
 
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
+Delete master offer file
 
-## Delete a file
+To get master offer file(s) created by you
 
-You can delete the current file by clicking the **Remove** button in the file explorer. The file will be moved into the **Trash** folder and automatically deleted after 7 days of inactivity.
+My master offer files
 
-## Export a file
+Master offer file detail
 
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
+## Step #3.1 : Get all Providers connected to TCB
 
+{
+    curl -X GET '/providers' \ 
+    -H 'Content-Type: application/json' \ 
+    -H 'x-api-key: ACCESS_KEY' \ 
+    -H 'x-access-token: ACCESS_TOKEN' 
+            
+    }
 
-# Synchronization
+You can call this API multiple times to authorize multiple providers. Once the provider is authorized, you can get the list of all authorized providers of a master offer file
 
-Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your **Google Drive**, your **Dropbox** and your **GitHub** accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow... The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.
+Get assigned providers of master offer file
 
-There are two types of synchronization and they can complement each other:
+## Step #4.1 : Authorize a Authorized Partner
 
-- The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
-	> To start syncing your workspace, just sign in with Google in the menu.
+{
+    curl -X PUT '/manufacturer/toggle/manufacturer_agent' \ 
+    -H 'Content-Type: application/json' \ 
+    -H 'x-api-key: ACCESS_KEY' \ 
+    -H 'x-access-token: ACCESS_TOKEN' \ 
+    --data '{"email_domain":"example1.com"}'
+            
+    }
 
-- The file synchronization will keep one file of the workspace synced with one or multiple files in **Google Drive**, **Dropbox** or **GitHub**.
-	> Before starting to sync files, you must link an account in the **Synchronize** sub-menu.
+You can call this API multiple times to authorize multiple Authorized Partners.
 
-## Open a file
+To unauthorize a Authorized Partner use
 
-You can open a file from **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Open from**. Once opened in the workspace, any modification in the file will be automatically synced.
+Call the same toggle api (/manufacturer/toggle/manufacturer_agent)
 
-## Save a file
+You can also get the list of all authorized Authorized Partners
 
-You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
+Get connected Authorized Partners
 
-## Synchronize a file
+## Step #4.2 : Give Brand Access to a Authorized Partner to create / manage master offer files and receive redemption data
 
-Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.
+{
+curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \ 
+-H 'Content-Type: application/json'  
+-H 'x-api-key: ACCESS_KEY' \ 
+-H 'x-access-token: ACCESS_TOKEN' \ 
+--data '{"access_type":"campaign_set"}'
+            
+    }
 
-If you just have modified your file and you want to force syncing, click the **Synchronize now** button in the navigation bar.
+You can call this API to authorize your brand to a authorized partner with proper access_type. access_type attribute value should be one of the below
 
-> **Note:** The **Synchronize now** button is disabled if you have no file to synchronize.
-
-## Manage file synchronization
-
-Since one file can be synced with multiple locations, you can list and manage synchronized locations by clicking **File synchronization** in the **Synchronize** sub-menu. This allows you to list and remove synchronized locations that are linked to your file.
-
-
-# Publication
-
-Publishing in StackEdit makes it simple for you to publish online your files. Once you're happy with a file, you can publish it to different hosting platforms like **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **WordPress** and **Zendesk**. With [Handlebars templates](http://handlebarsjs.com/), you have full control over what you export.
-
-> Before starting to publish, you must link an account in the **Publish** sub-menu.
-
-## Publish a File
-
-You can publish your file by opening the **Publish** sub-menu and by clicking **Publish to**. For some locations, you can choose between the following formats:
-
-- Markdown: publish the Markdown text on a website that can interpret it (**GitHub** for instance),
-- HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).
-
-## Update a publication
-
-After publishing, StackEdit keeps your file linked to that publication which makes it easy for you to re-publish it. Once you have modified your file and you want to update your publication, click on the **Publish now** button in the navigation bar.
-
-> **Note:** The **Publish now** button is disabled if your file has not been published yet.
-
-## Manage file publication
-
-Since one file can be published to multiple locations, you can list and manage publish locations by clicking **File publication** in the **Publish** sub-menu. This allows you to list and remove publication locations that are linked to your file.
-
-
-# Markdown extensions
-
-StackEdit extends the standard Markdown syntax by adding extra **Markdown extensions**, providing you with some nice features.
-
-> **ProTip:** You can disable any **Markdown extension** in the **File properties** dialog.
-
-
-## SmartyPants
-
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
-
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
-
-
-## KaTeX
-
-You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):
-
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
-
-> You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
-
-
-## UML diagrams
-
-You can render UML diagrams using [Mermaid](https://mermaidjs.github.io/). For example, this will produce a sequence diagram:
-
-```mermaid
-sequenceDiagram
-Alice -->> Bob: Hello Bob, how are you?
-Bob-->>John: How about you John?
-Bob--x Alice: I am good thanks!
-Bob-x John: I am good thanks!
-Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
-
-Bob-->Alice: Checking with John...
-Alice->John: Yes... John, how are you?
-```
-
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
+-   **view_only:**  can view all the master offer files of the brand.
+-   **campaign_set:**  can edit campaign detail of the master offer file of the brand.
+-   **full_set:**  can edit complete master offer file of the brand.
+-   **full_set_with_lock:**  can edit complete master offer and of the brand and can lock it to stop future update. Once the master offer file is locked, only campaign data (following attributes) can be edited.
+    -   description
+    -   campaign_start_time
+    -   campaign_end_time
+    -   redemption_start_time
+    -   redemption_end_time
+    -   total_circulation
+    -   primary_purchase_gtins
+    -   second_purchase_gtins
+    -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMj
-QzNDU5Nl19
+eyJoaXN0b3J5IjpbMTE2MDEzMTkzNiwxNTE2NjQ2NDc3LDQwOT
+g0MDg4NCwtOTIyNDM0NTk2XX0=
 -->
