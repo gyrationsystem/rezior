@@ -88,7 +88,7 @@ Once the master offer file is created, you can use the below API call to manage 
 
 Assign / Unassign provider to master offer file
 
-Delete master offer file
+    Delete master offer file
 
 To get master offer file(s) created by you
 
@@ -159,7 +159,7 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   third_purchase_gtins
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyODk2NTQ0OSwtNzE3MjYwMjc4LDExNj
-AxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMjQzNDU5
-Nl19
+eyJoaXN0b3J5IjpbMjAzMTk5Njk4MywtNTI4OTY1NDQ5LC03MT
+cyNjAyNzgsMTE2MDEzMTkzNiwxNTE2NjQ2NDc3LDQwOTg0MDg4
+NCwtOTIyNDM0NTk2XX0=
 -->
