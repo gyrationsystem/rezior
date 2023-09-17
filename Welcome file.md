@@ -5,15 +5,17 @@ Authorized Partner APIs allow the ability to connect to the TCB from your intern
 
 ## Step #1 : Get Access Token
 
-    {
-        curl -X POST '/access_token' \   
-        -H 'Content-Type: application/json' \ 
-        -H 'x-api-key: ACCESS_KEY' \ 
-        --data '{ 
-        "access_key": "ACCESS_KEY", 
-       "secret_key": "SECRET_KEY" 
-         }
-        }
+  
+
+      {
+            curl -X POST '/access_token' \   
+            -H 'Content-Type: application/json' \ 
+            -H 'x-api-key: ACCESS_KEY' \ 
+            --data '{ 
+            "access_key": "ACCESS_KEY", 
+           "secret_key": "SECRET_KEY" 
+             }
+            }
 
 The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs.
 
@@ -152,6 +154,7 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   third_purchase_gtins
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MT
-Y2NDY0NzcsNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbLTE1ODg1ODUxMTQsLTcxNzI2MDI3OCwxMT
+YwMTMxOTM2LDE1MTY2NDY0NzcsNDA5ODQwODg0LC05MjI0MzQ1
+OTZdfQ==
 -->
