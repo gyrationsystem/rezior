@@ -2,6 +2,11 @@
 
 Authorized Partner APIs allow the ability to connect to the TCB from your internal systems so that you can directly deposit and manage an 8112 offer into a manufacturer’s TCB account and retrieve redemption data. APIs are NOT required for a Authorized Partner to perform your functions as they relate to The Coupon Bureau, these APIs are designed specifically for partners who are looking to integrate these functions into your own system.
 
+|  Name|  Roll No|
+|--|--|
+| Rakesh Kumar |004455  |
+
+
 
 ## Step #1 : Get Access Token
 
@@ -154,7 +159,7 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   third_purchase_gtins
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1ODg1ODUxMTQsLTcxNzI2MDI3OCwxMT
-YwMTMxOTM2LDE1MTY2NDY0NzcsNDA5ODQwODg0LC05MjI0MzQ1
-OTZdfQ==
+eyJoaXN0b3J5IjpbLTUyODk2NTQ0OSwtNzE3MjYwMjc4LDExNj
+AxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMjQzNDU5
+Nl19
 -->
