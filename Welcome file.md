@@ -1,109 +1,17 @@
 
-## Manufacturer Getting Started Guide
+## Provider Guide
 
-Authorized Partner APIs allow the ability to connect to the TCB from your internal systems so that you can directly deposit and manage an 8112 offer into a manufacturer’s TCB account and retrieve redemption data. APIs are NOT required for a Authorized Partner to perform your functions as they relate to The Coupon Bureau, these APIs are designed specifically for partners who are looking to integrate these functions into your own system.
+Provider APIs allow a coupon provider to deposit/ delete a serialized data string (the serialized data string distributed to a consumer) into a manufacturer’s Master Offer File along with a series of other functions both required and optional to enhance the consumer experience. A provider will only be able to deposit serialized data strings into Master Offer Files of those manufacturers who have authorized them.
+
+## REQUIRED PROVIDER FUNCTIONS
+
+The following required functions are used to meet industry standards and maintain consistent basic consumer experience functions across providers. All required functions will require proof of application before moving to the production server. Click here to view our Provider Guide to Universal Digital Coupons for more information about all provider functions.
+
+-   DEPOSIT SERIALIZED DATA STRINGS USING PROVIDER PREFIX (instructions below)
+-   DELETE SERIALIZED DATA STRINGS (instructions below)
+-   APPLY FETCHCODE TO CONSUMER EXPERIENCE (instructions below)
 
 ## Step #1 : Get Access Token
-
-{
-    curl -X POST '/access_token' \   
-    -H 'Content-Type: application/json' \ 
-    -H 'x-api-key: ACCESS_KEY' \ 
-    --data '{ 
-    "access_key": "ACCESS_KEY", 
-   "secret_key": "SECRET_KEY" 
-     }
-    }
-
-The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs.
-
-## Step #2 : Get Connected Manufacturers
-
-Required in step #3 where you will create master offer file on behalf of one manufacturer.
-
-{
-    curl -X GET '/manufacturer_agent/manufacturers' \ 
-    -H 'Content-Type: application/json' \ 
-    -H 'x-api-key: ACCESS_KEY' \ 
-    -H 'x-access-token: ACCESS_TOKEN' 
-            
-    }
-
-You can cache the response of this API call as there will be no change in response until and unless another manufacturer authorizes the same Authorized Partner. Once you cache it, you can skip step #2 while creating a master offer file.
-
-## Step #3 : Create Master Offer File for a Manufacturer
-
-{
-curl -X POST '/manufacturer/base_gs1?email_domain=<MANUFACTURER_EMAIL_DOMAIN>' \ 
--H 'Content-Type: application/json' \ 
--H 'x-api-key: ACCESS_KEY' \ 
--H 'x-access-token: ACCESS_TOKEN' \ 
---data '{
-    "data":{
-        "base_gs1":"8112010031493140188",
-        "brand_id":"XYZ",
-        "description":"50% off ",
-        "campaign_start_time":"04/21/2020",
-        "campaign_end_time":"04/30/2020",
-        "redemption_start_time":"04/22/2020",
-        "redemption_end_time":"04/30/2020",
-        "total_circulation":"100",
-        "primary_purchase_save_value":"1",
-        "primary_purchase_requirements":"1",
-        "primary_purchase_req_code":"1",
-        "primary_purchase_gtins":[
-            "294239749273","2390843209"
-            ],
-        "additional_purchase_rules_code":"",
-        "second_purchase_requirements":"",
-        "second_purchase_gs1_company_prefix":"",
-        "second_purchase_req_code":"",
-        "second_purchase_gtins":[
-            ""
-            ],
-        "third_purchase_requirements":"",
-        "third_purchase_gs1_company_prefix":"",
-        "third_purchase_req_code":"",
-        "third_purchase_gtins":[
-            ""
-            ],
-        "gln":"",
-        "save_value_code":"1",
-        "applies_to_which_item":"",
-        "store_coupon":"1",
-        "donot_multiply_flag":""
-    }
-}'
-            
-    }
-
-Once the master offer file is created, you can use the below API call to manage the master offer files.
-
-Assign / Unassign provider to master offer file
-
-Delete master offer file
-
-To get master offer file(s) created by you
-
-My master offer files
-
-Master offer file detail
-
-## Step #3.1 : Get all Providers connected to TCB
-
-{
-    curl -X GET '/providers' \ 
-    -H 'Content-Type: application/json' \ 
-    -H 'x-api-key: ACCESS_KEY' \ 
-    -H 'x-access-token: ACCESS_TOKEN' 
-            
-    }
-
-You can call this API multiple times to authorize multiple providers. Once the provider is authorized, you can get the list of all authorized providers of a master offer file
-
-Get assigned providers of master offer file
-
-## Step #4.1 : Authorize a Authorized Partner
 
 {
     curl -X PUT '/manufacturer/toggle/manufacturer_agent' \ 
@@ -114,44 +22,67 @@ Get assigned providers of master offer file
             
     }
 
-You can call this API multiple times to authorize multiple Authorized Partners.
+The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs
 
-To unauthorize a Authorized Partner use
+## Step #2 : Get authorized master offer files.
 
-Call the same toggle api (/manufacturer/toggle/manufacturer_agent)
-
-You can also get the list of all authorized Authorized Partners
-
-Get connected Authorized Partners
-
-## Step #4.2 : Give Brand Access to a Authorized Partner to create / manage master offer files and receive redemption data
+Manufacturers / Authorized partners will authorize provider to distribute master offer files. To get the list of all authorized master offer files, use  **My master offer files API**
 
 {
-curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \ 
--H 'Content-Type: application/json'  
--H 'x-api-key: ACCESS_KEY' \ 
--H 'x-access-token: ACCESS_TOKEN' \ 
---data '{"access_type":"campaign_set"}'
+    curl -X GET '/provider/base_gs1s' \ 
+    -H 'Content-Type: application/json' \ 
+    -H 'x-api-key: ACCESS_KEY' \ 
+    -H 'x-access-token: ACCESS_TOKEN' 
             
     }
 
-You can call this API to authorize your brand to a authorized partner with proper access_type. access_type attribute value should be one of the below
+## Step #3 : Generate your serialized data string
 
--   **view_only:**  can view all the master offer files of the brand.
--   **campaign_set:**  can edit campaign detail of the master offer file of the brand.
--   **full_set:**  can edit complete master offer file of the brand.
--   **full_set_with_lock:**  can edit complete master offer and of the brand and can lock it to stop future update. Once the master offer file is locked, only campaign data (following attributes) can be edited.
-    -   description
-    -   campaign_start_time
-    -   campaign_end_time
-    -   redemption_start_time
-    -   redemption_end_time
-    -   total_circulation
-    -   primary_purchase_gtins
-    -   second_purchase_gtins
-    -   third_purchase_gtins
+To accommodate multiple providers on a single master offer file, a “provider prefix” will be assigned and implemented as part of the serial number for each data string. This will resolve any potential duplication of serial numbers across providers. Follow the below process to generate your serialized data string
+
+Master Offer File : 8112............VLI**PROVIDER_PREFIX**CONSUMER_IDENTIFIER
+
+VLI = Length(PROVIDER_PREFIX) + LENGTH(CONSUMER_IDENTIFIER) - 6
+
+Use Serialization Prefix API to get your PROVIDER_PREFIX
+
+{
+    curl -X POST '/provider/serialization_prefix' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' ' 
+            
+    }
+
+## Step #4 : Deposit serialized data string
+
+    curl -X POST '/provider/deposit' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' \
+    --data '{"gs1s":"<Comma separated GS1s>"}'
+            
+    
+
+## Recommendations for Consumer Presentment
+
+## For Single Data String
+
+Display the Single Data String as QR code to stay consistent with all display recommendations. If the QR code is not scannable, get the fetch_code and render as one dimensional Code-128 format. Also display the fetch_code below the one dimensional barcode so that the cashier can manually enter in case the screen is broken and one dimensional barcode is not scannable.
+
+## For Provider Bundle (bundle of only provider authorized offers)
+
+Provider should implement bundling of their serialized data strings and present the expanded_bundle_id as a QR code. If the QR code is not scannable, render the bundle_id as one dimensional Code-128 barocde. Also display the fetch_code below the one dimensional barcode so that the cashier can manually enter in case the screen is broken and one dimensional barcode is not scannable.
+
+## For Universal Bundle (bundling across providers utilizing verified credential)
+
+Provider could implement universal bundling and present the expanded_bundle_id as a QR code. If the QR code is not scannable, render the bundle_id as one dimensional barcode in Code128 format. Also display the fetch_code below the one dimensional barcode so that the cashier can manually enter in case the screen is broken and one dimensional barcode is not scannable.
+
+![logo](http://localhost:3000/assets/images/provider_presentment.png)
+
+**NOTE:**  bundle_id, expired_coupon_id and fetch_code are the codes that are retrieved in real-time from a consumer's phone. Bundle codes are valid for 60 minutes and fetch_code is valid for 10 minutes and will expire. Its recommended to refresh the code automatically without user action.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyMTMyOTAxMCwyMDMxOTk2OTgzLC01Mj
+eyJoaXN0b3J5IjpbLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mj
 g5NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0
 NzcsNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
 -->
