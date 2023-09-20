@@ -1,5 +1,6 @@
 
 ## Provider Guide
+$$1.md$$
 
 Provider APIs allow a coupon provider to deposit/ delete a serialized data string (the serialized data string distributed to a consumer) into a manufacturer’s Master Offer File along with a series of other functions both required and optional to enhance the consumer experience. A provider will only be able to deposit serialized data strings into Master Offer Files of those manufacturers who have authorized them.
 
@@ -82,7 +83,7 @@ Provider could implement universal bundling and present the expanded_bundle_id a
 
 **NOTE:**  bundle_id, expired_coupon_id and fetch_code are the codes that are retrieved in real-time from a consumer's phone. Bundle codes are valid for 60 minutes and fetch_code is valid for 10 minutes and will expire. Its recommended to refresh the code automatically without user action.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mj
-g5NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0
-NzcsNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbNjk1ODU2OTc5LC05OTExMjY0MzksMjAzMT
+k5Njk4MywtNTI4OTY1NDQ5LC03MTcyNjAyNzgsMTE2MDEzMTkz
+NiwxNTE2NjQ2NDc3LDQwOTg0MDg4NCwtOTIyNDM0NTk2XX0=
 -->
