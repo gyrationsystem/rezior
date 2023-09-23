@@ -88,13 +88,13 @@ Master offer file detail
 
 ## Step #3.1 : Get all Providers connected to TCB
 
-{
-    curl -X GET '/providers' \ 
-    -H 'Content-Type: application/json' \ 
-    -H 'x-api-key: ACCESS_KEY' \ 
-    -H 'x-access-token: ACCESS_TOKEN' 
-            
-    }
+
+ curl -X GET '/providers' \ 
+-H 'Content-Type: application/json' \ 
+-H 'x-api-key: ACCESS_KEY' \ 
+-H 'x-access-token: ACCESS_TOKEN' 
+                
+  
 
 You can call this API multiple times to authorize multiple providers. Once the provider is authorized, you can get the list of all authorized providers of a master offer file
 
@@ -102,15 +102,14 @@ Get assigned providers of master offer file
 
 ## Step #4.1 : Authorize a Authorized Partner
 
-{
+
     curl -X PUT '/manufacturer/toggle/manufacturer_agent' \ 
     -H 'Content-Type: application/json' \ 
-    -H 'x-api-key: ACCESS_KEY' \ 
+     -H 'x-api-key: ACCESS_KEY' \ 
     -H 'x-access-token: ACCESS_TOKEN' \ 
     --data '{"email_domain":"example1.com"}'
-            
-    }
 
+ 
 You can call this API multiple times to authorize multiple Authorized Partners.
 
 To unauthorize a Authorized Partner use
@@ -123,15 +122,13 @@ Get connected Authorized Partners
 
 ## Step #4.2 : Give Brand Access to a Authorized Partner to create / manage master offer files and receive redemption data
 
-{
-curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \ 
--H 'Content-Type: application/json'  
--H 'x-api-key: ACCESS_KEY' \ 
--H 'x-access-token: ACCESS_TOKEN' \ 
---data '{"access_type":"campaign_set"}'
-            
-    }
 
+    curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \ 
+    -H 'Content-Type: application/json'  
+    -H 'x-api-key: ACCESS_KEY' \ 
+    -H 'x-access-token: ACCESS_TOKEN' \ 
+    --data '{"access_type":"campaign_set"}'
+            
 You can call this API to authorize your brand to a authorized partner with proper access_type. access_type attribute value should be one of the below
 
 -   **view_only:**  can view all the master offer files of the brand.
@@ -148,8 +145,8 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3Njk1MzYxNDYsLTE2MDMxNDgwNTMsLT
-k5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5NjU0NDksLTcxNzI2
-MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0NzcsNDA5ODQwODg0LC
-05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbLTIxMTIxNDMyMjgsLTE3Njk1MzYxNDYsLT
+E2MDMxNDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5
+NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0Nz
+csNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
 -->
