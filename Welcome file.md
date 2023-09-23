@@ -12,21 +12,17 @@ Authorized Partner APIs allow the ability to connect to the TCB from your intern
         "access_key": "ACCESS_KEY", 
        "secret_key": "SECRET_KEY" 
          }
-        
-
-The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs.
+ The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs.
 
 ## Step #2 : Get Connected Manufacturers
 
 Required in step #3 where you will create master offer file on behalf of one manufacturer.
 
-         curl -X GET '/manufacturer_agent/manufacturers' \ 
-        -H 'Content-Type: application/json' \ 
-        -H 'x-api-key: ACCESS_KEY' \ 
-        -H 'x-access-token: ACCESS_TOKEN' 
-                
-        
-
+    curl -X GET '/manufacturer_agent/manufacturers' \ 
+    -H 'Content-Type: application/json' \ 
+    -H 'x-api-key: ACCESS_KEY' \ 
+    -H 'x-access-token: ACCESS_TOKEN' 
+      
 You can cache the response of this API call as there will be no change in response until and unless another manufacturer authorizes the same Authorized Partner. Once you cache it, you can skip step #2 while creating a master offer file.
 
 ## Step #3 : Create Master Offer File for a Manufacturer
@@ -79,11 +75,8 @@ Once the master offer file is created, you can use the below API call to manage 
 Assign / Unassign provider to master offer file
 
 Delete master offer file
-
 To get master offer file(s) created by you
-
 My master offer files
-
 Master offer file detail
 
 ## Step #3.1 : Get all Providers connected to TCB
@@ -145,7 +138,7 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMTIxNDMyMjgsLTE3Njk1MzYxNDYsLT
+eyJoaXN0b3J5IjpbLTEwMzQzNTkwMDIsLTE3Njk1MzYxNDYsLT
 E2MDMxNDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5
 NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0Nz
 csNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
