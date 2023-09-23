@@ -74,9 +74,9 @@ Once the master offer file is created, you can use the below API call to manage 
 
 Assign / Unassign provider to master offer file
 
-Delete master offer file
+ - [ ] Delete master offer file
 To get master offer file(s) created by you
-My master offer files
+ - [ ] My master offer files
 Master offer file detail
 
 ## Step #3.1 : Get all Providers connected to TCB
@@ -138,8 +138,8 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzQzNTkwMDIsLTE3Njk1MzYxNDYsLT
-E2MDMxNDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5
-NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0Nz
-csNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbOTE2MjI2MDk0LC0xNzY5NTM2MTQ2LC0xNj
+AzMTQ4MDUzLC05OTExMjY0MzksMjAzMTk5Njk4MywtNTI4OTY1
+NDQ5LC03MTcyNjAyNzgsMTE2MDEzMTkzNiwxNTE2NjQ2NDc3LD
+QwOTg0MDg4NCwtOTIyNDM0NTk2XX0=
 -->
