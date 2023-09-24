@@ -62,16 +62,20 @@ The Access Token will be valid for 24 hours. You should cache it and use the sam
     
         
 Once the master offer file is created, you can use the below API call to manage the master offer files.  
-Assign / Unassign provider to master offer file  
-Delete master offer file  
+
+> Assign / Unassign provider to master offer file> 
+> Delete master offer file
+
   
-`To get master offer file(s) created by you  
-`My master offer files  
-Master offer file detail  
+To get master offer file(s) created by you  
+
+> My master offer files   
+> Master offer file detail
+
   
-`Master offer file needs to be locked before a provider deposits a serialized data string. If the master offer file is editable (not locked), no one will be able to deposit a serialized data string under that master offer file.  
-`My master offer files  
-Master offer file detail`
+Master offer file needs to be locked before a provider deposits a serialized data string. If the master offer file is editable (not locked), no one will be able to deposit a serialized data string under that master offer file.  
+My master offer files  
+Master offer file detail
 
 #### Step #3.1 : Get all Providers connected to TCB
 
@@ -137,7 +141,7 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcxNDU2NzIzNywtMTMyNzA4NjUzMCwtMT
+eyJoaXN0b3J5IjpbLTE5NjI2MzE0MywtMTMyNzA4NjUzMCwtMT
 UwMDIzMjEzNSw5MTYyMjYwOTQsLTE3Njk1MzYxNDYsLTE2MDMx
 NDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5NjU0ND
 ksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0NzcsNDA5
