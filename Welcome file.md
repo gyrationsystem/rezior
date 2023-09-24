@@ -5,6 +5,13 @@ Accelerators and Retailers can make use of TCB's master offer file sync API to c
 
 ####   Sync API (/syncmof/:from_date/:to_date/:mode)
 
+fsdf
+
+> Blockquotesdfsfs
+> fsdfd
+> sdfsfs
+> sdfsd
+
 Use this API to pull all master offer files purchase requirements into your server for faster processing. Use created mode first to fetch all the master offer files created till date in the selected date range. Then use updated mode to fetch the master offer files that are updated. We recommend running sync mof api call with updated mode in every day to keep your local database up to date.
 
 The webhook message will look like this
@@ -67,8 +74,9 @@ Recommended Local Database Workflow
 
 Below is a possible workflow to process redemption with local database efficiently. This process will update the local database in real time if the the master offer files are missing from local database or if there is any changes in the purchase requirements. You can use this approach without the sync API call. This approach will eventually build the local database as the redemption happens.![](https://tcb-static.s3.amazonaws.com/imgs/local_mof_flow.png)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDAyMzIxMzUsOTE2MjI2MDk0LC0xNz
-Y5NTM2MTQ2LC0xNjAzMTQ4MDUzLC05OTExMjY0MzksMjAzMTk5
-Njk4MywtNTI4OTY1NDQ5LC03MTcyNjAyNzgsMTE2MDEzMTkzNi
-wxNTE2NjQ2NDc3LDQwOTg0MDg4NCwtOTIyNDM0NTk2XX0=
+eyJoaXN0b3J5IjpbLTEzMjcwODY1MzAsLTE1MDAyMzIxMzUsOT
+E2MjI2MDk0LC0xNzY5NTM2MTQ2LC0xNjAzMTQ4MDUzLC05OTEx
+MjY0MzksMjAzMTk5Njk4MywtNTI4OTY1NDQ5LC03MTcyNjAyNz
+gsMTE2MDEzMTkzNiwxNTE2NjQ2NDc3LDQwOTg0MDg4NCwtOTIy
+NDM0NTk2XX0=
 -->
