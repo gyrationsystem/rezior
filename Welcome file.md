@@ -17,7 +17,7 @@ Authorized Partner APIs allow the ability to connect to the TCB from your intern
 ## Step #2 : Get Connected Manufacturers
 
 Required in step #3 where you will create master offer file on behalf of one manufacturer.
-
+f
     curl -X GET '/manufacturer_agent/manufacturers' \ 
     -H 'Content-Type: application/json' \ 
     -H 'x-api-key: ACCESS_KEY' \ 
@@ -138,8 +138,8 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE2MjI2MDk0LC0xNzY5NTM2MTQ2LC0xNj
-AzMTQ4MDUzLC05OTExMjY0MzksMjAzMTk5Njk4MywtNTI4OTY1
-NDQ5LC03MTcyNjAyNzgsMTE2MDEzMTkzNiwxNTE2NjQ2NDc3LD
-QwOTg0MDg4NCwtOTIyNDM0NTk2XX0=
+eyJoaXN0b3J5IjpbLTgzMDk1NTUwOCw5MTYyMjYwOTQsLTE3Nj
+k1MzYxNDYsLTE2MDMxNDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2
+OTgzLC01Mjg5NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LD
+E1MTY2NDY0NzcsNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
 -->
