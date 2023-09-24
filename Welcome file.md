@@ -1,82 +1,145 @@
 
-## Local Master Offer File Validation During Redemption
+## Manufacturer Getting Started Guide
 
-Accelerators and Retailers can make use of TCB's master offer file sync API to create a local database to speed up the redemption process. This process will eliminate the need of redemption API call if the basket does not match with the purchase requirements.
+Manufacturer APIs allow a manufacturer to deposit their own offers into TCB through their own internal systems. APIs are NOT required for a Manufacturer to connect to The Coupon Bureau, these APIs are designed specifically for partners who are looking to integrate these functions into your own system.
 
-####   Sync API (/syncmof/:from_date/:to_date/:mode)
+API functions include Master Offer File deposits, Authorized Partner authorization by account for Master Offer File management, and Provider authorization by Master Offer File or account for distribution.
 
-fsdf
+#### Step #1 : Get Access Token
 
-> Blockquotesdfsfs
-> fsdfd
-> sdfsfs
-> sdfsd
+    curl -X POST '/access_token' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    --data '{ 
+        "access_key": "ACCESS_KEY", 
+        "secret_key": "SECRET_KEY" 
+    }'
 
-Use this API to pull all master offer files purchase requirements into your server for faster processing. Use created mode first to fetch all the master offer files created till date in the selected date range. Then use updated mode to fetch the master offer files that are updated. We recommend running sync mof api call with updated mode in every day to keep your local database up to date.
+The Access Token will be valid for 24 hours. You should cache it and use the same access token for next 23 hours 59 mins to call any other APIs.
 
-The webhook message will look like this
+#### Step #2 : Create Master Offer File
 
-{
-  reportUrl: 'CSV report url. This URL is valid for 5 days', 
-  action: 'report',
-  job_id: 'The job id will be returned when you run the query',
-  primary_signature: '...',
-  secondary_signature: '...',
-  event_timestamp: ...
-}
-                  
-
+    curl -X POST '/manufacturer/base_gs1' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' \
+    --data '{
+        "data":{
+            "base_gs1":"8112010031493140188",
+            "brand_id":"XYZ",
+            "description":"50% off ",
+            "campaign_start_time":"04/21/2020",
+            "campaign_end_time":"04/30/2020",
+            "redemption_start_time":"04/22/2020",
+            "redemption_end_time":"04/30/2020",
+            "total_circulation":"100",
+            "primary_purchase_save_value":"1",
+            "primary_purchase_requirements":"1",
+            "primary_purchase_req_code":"1",
+            "primary_purchase_gtins":[
+                "294239749273","2390843209"
+                ],
+            "additional_purchase_rules_code":"",
+            "second_purchase_requirements":"",
+            "second_purchase_gs1_company_prefix":"",
+            "second_purchase_req_code":"",
+            "second_purchase_gtins":[
+                ""
+                ],
+            "third_purchase_requirements":"",
+            "third_purchase_gs1_company_prefix":"",
+            "third_purchase_req_code":"",
+            "third_purchase_gtins":[
+                ""
+                ],
+            "gln":"",
+            "save_value_code":"1",
+            "applies_to_which_item":"",
+            "store_coupon":"1",
+            "donot_multiply_flag":""
+        }
+    }'
+    
+        
+Once the master offer file is created, you can use the below API call to manage the master offer files.  
+Assign / Unassign provider to master offer file  
+Delete master offer file  
   
-CSV file will include the followings (CSV File Header).
-
-"primary_purchase_gtins","second_purchase_gtins","third_purchase_gtins","settled","base_gs1","campaign_start_time","campaign_end_time","redemption_start_time","redemption_end_time","primary_purchase_save_value","primary_purchase_requirements","primary_purchase_req_code","additional_purchase_rules_code","second_purchase_requirements","second_purchase_gs1_company_prefix","second_purchase_req_code","third_purchase_requirements","third_purchase_gs1_company_prefix","third_purchase_req_code","save_value_code","applies_to_which_item","store_coupon","donot_multiply_flag","update_datetime"
-                  
-
+`To get master offer file(s) created by you  
+`My master offer files  
+Master offer file detail  
   
-reportUrl file is public and will be valid for 5 days. You could download the file and parse it to get the master offer file purchase requirements. Sample parsing code in NodeJS (using fast-csv library)
+`Master offer file needs to be locked before a provider deposits a serialized data string. If the master offer file is editable (not locked), no one will be able to deposit a serialized data string under that master offer file.  
+`My master offer files  
+Master offer file detail`
 
-const fs = require('fs');
-const path = require('path');
-const csv = require('fast-csv');
+#### Step #3.1 : Get all Providers connected to TCB
 
-fs.createReadStream(path.resolve(__dirname, '', 'file.csv'))
-    .pipe(csv.parse({ headers: true }))
-    .on('error', error => console.error(error))
-    .on('data', row => console.log(row))
-    .on('end', rowCount => console.log(`Parsed ${rowCount} rows`));
-                  
+curl -X GET '/providers' \
+-H 'Content-Type: application/json' \
+-H 'x-api-key: ACCESS_KEY' \
+-H 'x-access-token: ACCESS_TOKEN' 
+      
 
+This API response can be cached so that you can skip this step. Once you get the list of providers, you can select the desired providers (email_domain of the provider) from this list to authorize. Once the provider is authorized to distribute a master offer file, they can deposit the serialized GS1 of that master offer file.
+
+#### Step #3.2 : Authorize provider(s) to allow master offer file distribution
+
+curl -X POST '/manufacturer/base_gs1/<BASE_GS1>/toggle_provider' \
+-H 'Content-Type: application/json' \
+-H 'x-api-key: ACCESS_KEY' \
+-H 'x-access-token: ACCESS_TOKEN' \
+--data '{"email_domain":"example1.com"}'
+       
+
+You can call this API multiple times to authorize multiple providers. Once the provider is authorized, you can get the list of all authorized providers of a master offer file  
   
-fast-csv will convert every row to a JSON object and every key in the JSON object will be converted to string. You need to do appropriate formatting of the keys as defined in [Master Offer File Creation](https://try.thecouponbureau.org/developer/api_docs?menu=manufacturer&tab=master_offer_file&api=api_create_master_offer_file_post) API before storing in your local database.
+`Get assigned providers of master offer file`
 
-####   
-Use Local Database during coupon redemption
+#### Step #4.1 : Authorize a Authorized Partner
 
-There are multiple ways coupons can be presented by consumers at the checkout counter.
+curl -X PUT '/manufacturer/toggle/manufacturer_agent' \
+-H 'Content-Type: application/json' \
+-H 'x-api-key: ACCESS_KEY' \
+-H 'x-access-token: ACCESS_TOKEN' \
+--data '{"email_domain":"example1.com"}'
+        
 
--   **Single 8112 data string**: This will start with either  **81120 or 81121**  and length of the string  **> 14**
-    Local database  **can be used**  in this scenario.  [**Click here**](https://try.thecouponbureau.org/developer/)  to get the parsing logic (in NodeJS) to extract the base_gs1 which you can use to get the purchase requirement from your local database.
--   **Fetch Code**: This will start  **8112**  and have fixed lengh  **(14)**
-    Local database  **can not be used**  in this scenario. Call redemption API directly with this string to retrieve the purchase requirements.
--   **Bundle**: This will start  **81125**. Bundling of coupons is one of the fundamental features recommended by Coupon Bureau and our consumer app ecosystems created by providers apps and wallets will have this in built. This will enable consumers to select up to 15 coupons and then bundle them together into a single barcode to reduce the no of scans at the checkout counter. The Coupon Bureau supports two bundling formats.
-    -   **Simple Bundle**: Displayed as a Code128 barcode
-        Local database  **can not be used**  in this scenario. Use the redemption API directly.
-    -   **Expanded Bundle**  (with MOF data): Displayed as a QR code.
-        Local database  **can be used**  in this scenario.  [**Click here**](https://try.thecouponbureau.org/developer/)  to get the parsing logic (in NodeJS) to extract the base_gs1s and bundle_id. With the base_gs1s in hand, you will be able to use local database to extract the purchase requirements and validate basket. When the basket validation is done and you have identified the base_gs1s that are not applicable for this transaction, you will exclude these base_gs1s from the bundle by passing appropriate value in exclude_from_bundle parameter duing redemption.  [**Click here**](https://try.thecouponbureau.org/developer/)  to understand how you need to format the data for exclude_from_bundle parameter.
+You can call this API multiple times to authorize multiple Authorized Partners.  
+To unauthorize a Authorized Partner use  
+`Call the same toggle api (/manufacturer/toggle/manufacturer_agent)  
+  
+`You can also get the list of all authorized Authorized Partners  
+`Get connected Authorized Partners`
 
-####   
-Without Local Database
+#### Step #4.2 : Give Brand Access to a Authorized Partner to create / manage master offer files and receive redemption data
 
-For retailers and accelerators not using local database validation, any code presented (fetch_code, 8112 data string, bundle id, expanded_bundle_id) will be passed using TCB redemption API. We recommend two phase redemption process. First phase with pre_process flag, which will return the exact same response without doing actual redemption. This process will help Retailers and Accelerators get the purchase requirements. Then the basket validation will happen and once the appropriate data stings are identified for the transaction, redeem the data strings with pre_process flag "no".
+curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \
+-H 'Content-Type: application/json' 
+-H 'x-api-key: ACCESS_KEY' \
+-H 'x-access-token: ACCESS_TOKEN' \
+--data '{"access_type":"campaign_set"}'
+        
 
-####   
-Recommended Local Database Workflow
+You can call this API to authorize your brand to a authorized partner with proper access_type. access_type attribute value should be one of the below  
 
-Below is a possible workflow to process redemption with local database efficiently. This process will update the local database in real time if the the master offer files are missing from local database or if there is any changes in the purchase requirements. You can use this approach without the sync API call. This approach will eventually build the local database as the redemption happens.![](https://tcb-static.s3.amazonaws.com/imgs/local_mof_flow.png)
+-   **view_only**: can view all the master offer files of the brand.
+-   **campaign_set**: can edit campaign detail of the master offer file of the brand.
+-   **full_set**: can edit complete master offer file of the brand.
+-   **full_set_with_lock**: can edit complete master offer and of the brand and can lock it to stop future update. Once the master offer file is locked, only campaign data (following attributes) can be edited.
+    -   description
+    -   campaign_start_time
+    -   campaign_end_time
+    -   redemption_start_time
+    -   redemption_end_time
+    -   total_circulation
+    -   primary_purchase_gtins
+    -   second_purchase_gtins
+    -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjcwODY1MzAsLTE1MDAyMzIxMzUsOT
-E2MjI2MDk0LC0xNzY5NTM2MTQ2LC0xNjAzMTQ4MDUzLC05OTEx
-MjY0MzksMjAzMTk5Njk4MywtNTI4OTY1NDQ5LC03MTcyNjAyNz
-gsMTE2MDEzMTkzNiwxNTE2NjQ2NDc3LDQwOTg0MDg4NCwtOTIy
-NDM0NTk2XX0=
+eyJoaXN0b3J5IjpbLTcxNDU2NzIzNywtMTMyNzA4NjUzMCwtMT
+UwMDIzMjEzNSw5MTYyMjYwOTQsLTE3Njk1MzYxNDYsLTE2MDMx
+NDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5NjU0ND
+ksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0NzcsNDA5
+ODQwODg0LC05MjI0MzQ1OTZdfQ==
 -->
