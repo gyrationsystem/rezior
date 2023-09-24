@@ -74,8 +74,9 @@ To get master offer file(s) created by you
 
   
 Master offer file needs to be locked before a provider deposits a serialized data string. If the master offer file is editable (not locked), no one will be able to deposit a serialized data string under that master offer file.  
-My master offer files  
-Master offer file detail
+
+> **My master offer files**   
+> **Master offer file detail**
 
 #### Step #3.1 : Get all Providers connected to TCB
 
@@ -141,7 +142,7 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NjI2MzE0MywtMTMyNzA4NjUzMCwtMT
+eyJoaXN0b3J5IjpbLTgzODA5NDEzMywtMTMyNzA4NjUzMCwtMT
 UwMDIzMjEzNSw5MTYyMjYwOTQsLTE3Njk1MzYxNDYsLTE2MDMx
 NDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5NjU0ND
 ksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0NzcsNDA5
