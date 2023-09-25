@@ -65,66 +65,55 @@ The Access Token will be valid for 24 hours. You should cache it and use the sam
 **"redeem"** API responses will be returned in a JSON array, with each item corresponding to a GS1 from the "gs1s" request array.  
 Response fields (per GS1 item):
 
-  status -> "success" or "failure"
-  newly_redeemed -> List of GS1s redeemed successfully
-          {
-            gs1: <GS1 redeemed>,
-            master_offer_file: <Master offer file (base gs1) data string> Refer to master_offer_files mapping to get the purchase requirements
-          }
-  master_offer_files -> Master offer file purchase details
-
-
-Example response for redeem
-
-{
-  "status": "success",
-  "total_gs1s_processed": 3,
-  "already_redeemed": [
-      "811201777777754545412323432"
-  ],
-  "not_yet_live": [
-      "8112013333333676767223234543"
-  ],
-  "newly_redeemed": [
-      {
-          "gs1": "811201777777754545412323433",
-          "master_offer_file": "8112017777777545454"
-      }
-  ],
-  "master_offer_files": {
-      "8112017777777545454": {
-          "primary_purchase_gtins": [
-              "678987654323",
-              " 876789876543"
-          ],
-          "second_purchase_gtins": [],
-          "third_purchase_gtins": [],
-          "primary_purchase_save_value": 100,
-          "primary_purchase_requirements": 1,
-          "primary_purchase_req_code": 0
-      }
-  },
-  "message": "Added 1 gs1(s) as available to redeem",
-  "execution_id": "9fc7f4db-c5ca-41c7-8a65-65be4bcd8e76",
-  "execution_time_in_ms": 2405,
-  "execution_start_time": 1587495466023
-}
-        
-        
-
-####   
   
-Step #2.2 : Rollback a Coupon
 
-curl -X DELETE '/retailer/rollback/<GS1 to Rollback> \
--H 'Content-Type: application/json' \
--H 'x-api-key: ACCESS_KEY' \
--H 'x-access-token: ACCESS_TOKEN'
+> status -> "success" or "failure"   newly_redeemed -> List of GS1s
+> redeemed successfully
+>           {
+>             gs1: <GS1 redeemed>,
+>             master_offer_file: <Master offer file (base gs1) data string> Refer to master_offer_files mapping to get the purchase
+> requirements
+>           }   master_offer_files -> Master offer file purchase details
+> 
+> 
+> Example response for redeem
+> 
+> {   "status": "success",   "total_gs1s_processed": 3,  
+> "already_redeemed": [
+>       "811201777777754545412323432"   ],   "not_yet_live": [
+>       "8112013333333676767223234543"   ],   "newly_redeemed": [
+>       {
+>           "gs1": "811201777777754545412323433",
+>           "master_offer_file": "8112017777777545454"
+>       }   ],   "master_offer_files": {
+>       "8112017777777545454": {
+>           "primary_purchase_gtins": [
+>               "678987654323",
+>               " 876789876543"
+>           ],
+>           "second_purchase_gtins": [],
+>           "third_purchase_gtins": [],
+>           "primary_purchase_save_value": 100,
+>           "primary_purchase_requirements": 1,
+>           "primary_purchase_req_code": 0
+>       }   },   "message": "Added 1 gs1(s) as available to redeem",   "execution_id": "9fc7f4db-c5ca-41c7-8a65-65be4bcd8e76",  
+> "execution_time_in_ms": 2405,   "execution_start_time": 1587495466023
+> }
+
+        
+
+####   Step #2.2 : Rollback a Coupon
+
+    curl -X DELETE '/retailer/rollback/<GS1 to Rollback> \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN'
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5MDk5MTM3MSwxMzI5OTMxMjUyLC04Mz
-gwOTQxMzMsLTEzMjcwODY1MzAsLTE1MDAyMzIxMzUsOTE2MjI2
-MDk0LC0xNzY5NTM2MTQ2LC0xNjAzMTQ4MDUzLC05OTExMjY0Mz
-ksMjAzMTk5Njk4MywtNTI4OTY1NDQ5LC03MTcyNjAyNzgsMTE2
-MDEzMTkzNiwxNTE2NjQ2NDc3LDQwOTg0MDg4NCwtOTIyNDM0NT
-k2XX0=
+eyJoaXN0b3J5IjpbLTEyODQxMzU1NzUsMTMyOTkzMTI1MiwtOD
+M4MDk0MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIy
+NjA5NCwtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2ND
+M5LDIwMzE5OTY5ODMsLTUyODk2NTQ0OSwtNzE3MjYwMjc4LDEx
+NjAxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMjQzND
+U5Nl19
 -->
