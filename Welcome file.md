@@ -101,31 +101,31 @@ This API response can be cached so that you can skip this step. Once you get the
 
 You can call this API multiple times to authorize multiple providers. Once the provider is authorized, you can get the list of all authorized providers of a master offer file  
   
-`Get assigned providers of master offer file`
+Get assigned providers of master offer file
 
 #### Step #4.1 : Authorize a Authorized Partner
 
-curl -X PUT '/manufacturer/toggle/manufacturer_agent' \
--H 'Content-Type: application/json' \
--H 'x-api-key: ACCESS_KEY' \
--H 'x-access-token: ACCESS_TOKEN' \
---data '{"email_domain":"example1.com"}'
+    curl -X PUT '/manufacturer/toggle/manufacturer_agent' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' \
+    --data '{"email_domain":"example1.com"}'
         
 
 You can call this API multiple times to authorize multiple Authorized Partners.  
 To unauthorize a Authorized Partner use  
 `Call the same toggle api (/manufacturer/toggle/manufacturer_agent)  
   
-`You can also get the list of all authorized Authorized Partners  
-`Get connected Authorized Partners`
+You can also get the list of all authorized Authorized Partners  
+Get connected Authorized Partners
 
 #### Step #4.2 : Give Brand Access to a Authorized Partner to create / manage master offer files and receive redemption data
 
-curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \
--H 'Content-Type: application/json' 
--H 'x-api-key: ACCESS_KEY' \
--H 'x-access-token: ACCESS_TOKEN' \
---data '{"access_type":"campaign_set"}'
+    curl -X PUT '/manufacturer/manufacturer_agents/:manufacturer_agent_email_domain/toggle_brand/:brand_internal_id' \
+    -H 'Content-Type: application/json' 
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' \
+    --data '{"access_type":"campaign_set"}'
         
 
 You can call this API to authorize your brand to a authorized partner with proper access_type. access_type attribute value should be one of the below  
@@ -144,10 +144,10 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3ODc5MzE1NjMsMTMyOTkzMTI1MiwtOD
-M4MDk0MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIy
-NjA5NCwtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2ND
-M5LDIwMzE5OTY5ODMsLTUyODk2NTQ0OSwtNzE3MjYwMjc4LDEx
-NjAxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMjQzND
-U5Nl19
+eyJoaXN0b3J5IjpbLTYwMDcwODk1NSwxMzI5OTMxMjUyLC04Mz
+gwOTQxMzMsLTEzMjcwODY1MzAsLTE1MDAyMzIxMzUsOTE2MjI2
+MDk0LC0xNzY5NTM2MTQ2LC0xNjAzMTQ4MDUzLC05OTExMjY0Mz
+ksMjAzMTk5Njk4MywtNTI4OTY1NDQ5LC03MTcyNjAyNzgsMTE2
+MDEzMTkzNiwxNTE2NjQ2NDc3LDQwOTg0MDg4NCwtOTIyNDM0NT
+k2XX0=
 -->
