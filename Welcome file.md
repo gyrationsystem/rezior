@@ -114,93 +114,93 @@ Below are the type of actions generates webhook push message
   
 In case of deposit event, below message will be pushed to webhook  
 
-{
-  gs1: 'GS1 data string (coupon)', 
-  action: 'deposited',
-  primary_signature: '...',
-  secondary_signature: '...',
-  provider: { email_domain: 'qples.com' },
-  event_timestamp: ...,
-  caller: 'Base64 encoded caller object'
-}
+    {
+      gs1: 'GS1 data string (coupon)', 
+      action: 'deposited',
+      primary_signature: '...',
+      secondary_signature: '...',
+      provider: { email_domain: 'qples.com' },
+      event_timestamp: ...,
+      caller: 'Base64 encoded caller object'
+    }
                     
 
   
 In case of delete event (serialized data string is deleted by provider), below message will be pushed to webhook  
 
-{
-  gs1: 'GS1 data string (coupon)', 
-  action: 'deleted',
-  primary_signature: '...',
-  secondary_signature: '...',
-  provider: { email_domain: 'qples.com' },
-  event_timestamp: ...,
-  caller: 'Base64 encoded caller object'
-}
+    {
+      gs1: 'GS1 data string (coupon)', 
+      action: 'deleted',
+      primary_signature: '...',
+      secondary_signature: '...',
+      provider: { email_domain: 'qples.com' },
+      event_timestamp: ...,
+      caller: 'Base64 encoded caller object'
+    }
                     
 
   
 In case of redemption event (by retailer / accelerator), below message will be pushed to webhook  
 
-{
-  gs1: 'GS1 data string (coupon)', 
-  action: 'redeemed',
-  primary_signature: '...',
-  secondary_signature: '...',
-  event_timestamp: ...,
-  caller: 'Base64 encoded caller object'
-}
+    {
+      gs1: 'GS1 data string (coupon)', 
+      action: 'redeemed',
+      primary_signature: '...',
+      secondary_signature: '...',
+      event_timestamp: ...,
+      caller: 'Base64 encoded caller object'
+    }
                     
 
   
 In case of rollback event (redeemed serialized data string is roll backed by retailer / accelerator), below message will be pushed to webhook  
 
-{
-  gs1: 'GS1 data string (coupon)', 
-  action: 'rollback',
-  primary_signature: '...',
-  secondary_signature: '...',
-  event_timestamp: ...,
-  caller: 'Base64 encoded caller object'
-}
+    {
+      gs1: 'GS1 data string (coupon)', 
+      action: 'rollback',
+      primary_signature: '...',
+      secondary_signature: '...',
+      event_timestamp: ...,
+      caller: 'Base64 encoded caller object'
+    }
                     
 
   
 In case of coupon sharing event, following message will be delivered to webhook.  
 
-{
-    gs1: '811202120719781515159121831481597097',
-    action: 'shared',
-    primary_signature: '...',
-    secondary_signature: '...',
-    valid_till_timestamp: 1704016799000,
-    phone_hash: '...',
-    shared_by: 'example.com',
-    event_timestamp: 1679423752364,
-    campaign_metadata: {
-      title: '',
-      description: '',
-      terms: '',
-      mobile_image_url: '',
-      desktop_image_url: '',
-      dollar_amount: 2
+    {
+        gs1: '811202120719781515159121831481597097',
+        action: 'shared',
+        primary_signature: '...',
+        secondary_signature: '...',
+        valid_till_timestamp: 1704016799000,
+        phone_hash: '...',
+        shared_by: 'example.com',
+        event_timestamp: 1679423752364,
+        campaign_metadata: {
+          title: '',
+          description: '',
+          terms: '',
+          mobile_image_url: '',
+          desktop_image_url: '',
+          dollar_amount: 2
+        }
     }
-}
-                    
+                        
 
   
 In case of phone number change event in coupon sharing app ecosystem, following message will be delivered to webhook.  
 
-{
-    action: 'phone_number_change',
-    primary_signature: '...',
-    secondary_signature: '...',
-    old_phone_hash: '...',
-    new_phone_hash: '...',
-    shared_by: 'example.com',
-    event_timestamp: 1679423752364,
-    change_location: '...'
-}
+    {
+        action: 'phone_number_change',
+        primary_signature: '...',
+        secondary_signature: '...',
+        old_phone_hash: '...',
+        new_phone_hash: '...',
+        shared_by: 'example.com',
+        event_timestamp: 1679423752364,
+        change_location: '...'
+    }
                     
 
 #####   
@@ -209,91 +209,90 @@ Message Format: Action on Master Offer File
   
 In case of master offer file creation / updation event, following message will be pushed to webhook  
 
-{
-  base_gs1: '',
-  action: 'mof_update', 
-  primary_signature: '...',
-  secondary_signature: '...',
-  event_timestamp: ...,
-  email_domain: 'manufacturer email domain',
-  updated_mof_encoded: 'Base64 encoded master offer file object',
-  caller: 'Base64 encoded caller object'
-}
+    {
+      base_gs1: '',
+      action: 'mof_update', 
+      primary_signature: '...',
+      secondary_signature: '...',
+      event_timestamp: ...,
+      email_domain: 'manufacturer email domain',
+      updated_mof_encoded: 'Base64 encoded master offer file object',
+      caller: 'Base64 encoded caller object'
+    }
                     
 
   
 In case of master offer file deletion event, following message will be pushed to webhook  
 
-{
-  base_gs1: '',
-  internal_id: '', // This will come only in mof_delete action
-  action: 'mof_delete', 
-  primary_signature: '...',
-  secondary_signature: '...',
-  event_timestamp: ...,
-  email_domain: 'manufacturer email domain',
-  updated_mof_encoded: 'Base64 encoded master offer file object',
-  caller: 'Base64 encoded caller object'
-}
+    {
+      base_gs1: '',
+      internal_id: '', // This will come only in mof_delete action
+      action: 'mof_delete', 
+      primary_signature: '...',
+      secondary_signature: '...',
+      event_timestamp: ...,
+      email_domain: 'manufacturer email domain',
+      updated_mof_encoded: 'Base64 encoded master offer file object',
+      caller: 'Base64 encoded caller object'
+    }
                     
 
 Use the  [atob](https://www.npmjs.com/package/atob)  library in NodeJS to convert the updated_mof_encoded back to master offer file object.  `var actual = JSON.parse(atob(updated_mof_encoded));`
 
 updated_mof_encoded object will have the following information. You can keep the information in your own database to track changes in the master offer file.
 
-{
-  internal_id: ,
-  brand_id: , 
-  base_gs1: , 
-  description: , 
-  campaign_start_time: , 
-  campaign_end_time: , 
-  redemption_start_time: , 
-  redemption_end_time: , 
-  rolling_expiration: , 
-  rolling_expiration_days: , 
-  total_circulation: , 
-  primary_purchase_save_value: , 
-  primary_purchase_requirements: , 
-  primary_purchase_req_code: , 
-  primary_purchase_gtins: , 
-  additional_purchase_rules_code: , 
-  second_purchase_requirements: , 
-  second_purchase_gs1_company_prefix: , 
-  second_purchase_req_code: , 
-  second_purchase_gtins: , 
-  third_purchase_requirements: , 
-  third_purchase_gs1_company_prefix: , 
-  third_purchase_req_code: , 
-  third_purchase_gtins: , 
-  save_value_code: , 
-  applies_to_which_item: , 
-  store_coupon: , 
-  donot_multiply_flag: , 
-  providers: , 
-  active: , 
-  campaign_metadata: 
-}
+    {
+      internal_id: ,
+      brand_id: , 
+      base_gs1: , 
+      description: , 
+      campaign_start_time: , 
+      campaign_end_time: , 
+      redemption_start_time: , 
+      redemption_end_time: , 
+      rolling_expiration: , 
+      rolling_expiration_days: , 
+      total_circulation: , 
+      primary_purchase_save_value: , 
+      primary_purchase_requirements: , 
+      primary_purchase_req_code: , 
+      primary_purchase_gtins: , 
+      additional_purchase_rules_code: , 
+      second_purchase_requirements: , 
+      second_purchase_gs1_company_prefix: , 
+      second_purchase_req_code: , 
+      second_purchase_gtins: , 
+      third_purchase_requirements: , 
+      third_purchase_gs1_company_prefix: , 
+      third_purchase_req_code: , 
+      third_purchase_gtins: , 
+      save_value_code: , 
+      applies_to_which_item: , 
+      store_coupon: , 
+      donot_multiply_flag: , 
+      providers: , 
+      active: , 
+      campaign_metadata: 
+    }
                                           
 
-#####   
-Message Format: Webhook push for report
+#####   Message Format: Webhook push for report
 
   
 In case of any query initiation inside TCB platform, report will be sent to the webhook endpoint  
 
-{
-  reportUrl: 'CSV report url. This URL is valid for 5 days', 
-  action: 'report',
-  job_id: 'The job id will be returned when you run the query',
-  primary_signature: '...',
-  secondary_signature: '...',
-  event_timestamp: ...,
-  metadata: {
-    more_items: true | false,
-    partNo: ...
-  }
-}
+    {
+      reportUrl: 'CSV report url. This URL is valid for 5 days', 
+      action: 'report',
+      job_id: 'The job id will be returned when you run the query',
+      primary_signature: '...',
+      secondary_signature: '...',
+      event_timestamp: ...,
+      metadata: {
+        more_items: true | false,
+        partNo: ...
+      }
+    }
                     
 
   
@@ -304,11 +303,11 @@ If the requested query has more than 100k entries, TCB will process the reports 
   
 Caller object will have the following information identifying the caller (portal user or API key identified using access_key) who did the action. This will be a base64 encoded JSON object. To get the actual JSON object, `var caller = JSON.parse(atob(caller));` (NodeJS Code). **NOTE:** Caller object will only be returned to the enterpise webhook that executed the action.  
 
-{
-  identity: 'email address (portal user) or access_key (api user)', 
-  access_type: 'portal or api',
-  email_domain: ''
-}
+    {
+      identity: 'email address (portal user) or access_key (api user)', 
+      access_type: 'portal or api',
+      email_domain: ''
+    }
                     
 
 Primary / Secondary signature will help you validate that the message is originated at TheCouponBureau® server and it is intended for you. As soon as your callback is approved (Enterprise Setting page), you will see two secret keys (primary and secondary) associated with your callback.
@@ -366,11 +365,12 @@ TCB backend follows  **AT LEAST ONCE**  delivery mechanism. This means your webh
 **Retry window**
 
 If the initial delivery of the message fails, TCB attempts up to three retries with a delay between failed attempts set at 20 seconds.
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDk0MDgzNTUsLTEyODQxMzU1NzUsMT
-MyOTkzMTI1MiwtODM4MDk0MTMzLC0xMzI3MDg2NTMwLC0xNTAw
-MjMyMTM1LDkxNjIyNjA5NCwtMTc2OTUzNjE0NiwtMTYwMzE0OD
-A1MywtOTkxMTI2NDM5LDIwMzE5OTY5ODMsLTUyODk2NTQ0OSwt
-NzE3MjYwMjc4LDExNjAxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4ND
-A4ODQsLTkyMjQzNDU5Nl19
+eyJoaXN0b3J5IjpbMzY0NzA1NzU3LC0xMjg0MTM1NTc1LDEzMj
+k5MzEyNTIsLTgzODA5NDEzMywtMTMyNzA4NjUzMCwtMTUwMDIz
+MjEzNSw5MTYyMjYwOTQsLTE3Njk1MzYxNDYsLTE2MDMxNDgwNT
+MsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5NjU0NDksLTcx
+NzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0NzcsNDA5ODQwOD
+g0LC05MjI0MzQ1OTZdfQ==
 -->
