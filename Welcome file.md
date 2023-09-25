@@ -19,78 +19,84 @@ The Access Token will be valid for 24 hours. You should cache it and use the sam
 
 #### Step #2 : Create Master Offer File
 
-curl -X POST '/manufacturer/base_gs1' \
--H 'Content-Type: application/json' \
--H 'x-api-key: ACCESS_KEY' \
--H 'x-access-token: ACCESS_TOKEN' \
---data '{
-    "data":{
-        "base_gs1":"8112010031493140188",
-        "brand_id":"XYZ",
-        "description":"50% off ",
-        "campaign_start_time":"04/21/2020",
-        "campaign_end_time":"04/30/2020",
-        "redemption_start_time":"04/22/2020",
-        "redemption_end_time":"04/30/2020",
-        "total_circulation":"100",
-        "primary_purchase_save_value":"1",
-        "primary_purchase_requirements":"1",
-        "primary_purchase_req_code":"1",
-        "primary_purchase_gtins":[
-            "294239749273","2390843209"
-            ],
-        "additional_purchase_rules_code":"",
-        "second_purchase_requirements":"",
-        "second_purchase_gs1_company_prefix":"",
-        "second_purchase_req_code":"",
-        "second_purchase_gtins":[
-            ""
-            ],
-        "third_purchase_requirements":"",
-        "third_purchase_gs1_company_prefix":"",
-        "third_purchase_req_code":"",
-        "third_purchase_gtins":[
-            ""
-            ],
-        "gln":"",
-        "save_value_code":"1",
-        "applies_to_which_item":"",
-        "store_coupon":"1",
-        "donot_multiply_flag":""
-    }
-}'
+    curl -X POST '/manufacturer/base_gs1' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' \
+    --data '{
+        "data":{
+            "base_gs1":"8112010031493140188",
+            "brand_id":"XYZ",
+            "description":"50% off ",
+            "campaign_start_time":"04/21/2020",
+            "campaign_end_time":"04/30/2020",
+            "redemption_start_time":"04/22/2020",
+            "redemption_end_time":"04/30/2020",
+            "total_circulation":"100",
+            "primary_purchase_save_value":"1",
+            "primary_purchase_requirements":"1",
+            "primary_purchase_req_code":"1",
+            "primary_purchase_gtins":[
+                "294239749273","2390843209"
+                ],
+            "additional_purchase_rules_code":"",
+            "second_purchase_requirements":"",
+            "second_purchase_gs1_company_prefix":"",
+            "second_purchase_req_code":"",
+            "second_purchase_gtins":[
+                ""
+                ],
+            "third_purchase_requirements":"",
+            "third_purchase_gs1_company_prefix":"",
+            "third_purchase_req_code":"",
+            "third_purchase_gtins":[
+                ""
+                ],
+            "gln":"",
+            "save_value_code":"1",
+            "applies_to_which_item":"",
+            "store_coupon":"1",
+            "donot_multiply_flag":""
+        }
+    }'
     
         
 
 Once the master offer file is created, you can use the below API call to manage the master offer files.  
-`Assign / Unassign provider to master offer file  
-Delete master offer file  
+
+> Assign / Unassign provider to master offer file   
+> Delete master offer file
+
   
-`To get master offer file(s) created by you  
-`My master offer files  
-Master offer file detail  
+To get master offer file(s) created by you  
+
+> My master offer files   
+> Master offer file detail
+
   
-`Master offer file needs to be locked before a provider deposits a serialized data string. If the master offer file is editable (not locked), no one will be able to deposit a serialized data string under that master offer file.  
-`My master offer files  
-Master offer file detail`
+Master offer file needs to be locked before a provider deposits a serialized data string. If the master offer file is editable (not locked), no one will be able to deposit a serialized data string under that master offer file.  
+
+> My master offer files   
+> Master offer file detail
 
 #### Step #3.1 : Get all Providers connected to TCB
 
-curl -X GET '/providers' \
--H 'Content-Type: application/json' \
--H 'x-api-key: ACCESS_KEY' \
--H 'x-access-token: ACCESS_TOKEN' 
-      
+    curl -X GET '/providers' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN'
+
+ 
 
 This API response can be cached so that you can skip this step. Once you get the list of providers, you can select the desired providers (email_domain of the provider) from this list to authorize. Once the provider is authorized to distribute a master offer file, they can deposit the serialized GS1 of that master offer file.
 
 #### Step #3.2 : Authorize provider(s) to allow master offer file distribution
 
-curl -X POST '/manufacturer/base_gs1/<BASE_GS1>/toggle_provider' \
--H 'Content-Type: application/json' \
--H 'x-api-key: ACCESS_KEY' \
--H 'x-access-token: ACCESS_TOKEN' \
---data '{"email_domain":"example1.com"}'
+    curl -X POST '/manufacturer/base_gs1/<BASE_GS1>/toggle_provider' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: ACCESS_KEY' \
+    -H 'x-access-token: ACCESS_TOKEN' \
+    --data '{"email_domain":"example1.com"}'
        
 
 You can call this API multiple times to authorize multiple providers. Once the provider is authorized, you can get the list of all authorized providers of a master offer file  
@@ -138,10 +144,10 @@ You can call this API to authorize your brand to a authorized partner with prope
     -   second_purchase_gtins
     -   third_purchase_gtins
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEwNDU0MTUzLDEzMjk5MzEyNTIsLTgzOD
-A5NDEzMywtMTMyNzA4NjUzMCwtMTUwMDIzMjEzNSw5MTYyMjYw
-OTQsLTE3Njk1MzYxNDYsLTE2MDMxNDgwNTMsLTk5MTEyNjQzOS
-wyMDMxOTk2OTgzLC01Mjg5NjU0NDksLTcxNzI2MDI3OCwxMTYw
-MTMxOTM2LDE1MTY2NDY0NzcsNDA5ODQwODg0LC05MjI0MzQ1OT
-ZdfQ==
+eyJoaXN0b3J5IjpbLTE3ODc5MzE1NjMsMTMyOTkzMTI1MiwtOD
+M4MDk0MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIy
+NjA5NCwtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2ND
+M5LDIwMzE5OTY5ODMsLTUyODk2NTQ0OSwtNzE3MjYwMjc4LDEx
+NjAxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMjQzND
+U5Nl19
 -->
