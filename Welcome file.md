@@ -1,48 +1,53 @@
+TCB VERSION 4.0.1
 
-1.  **Time Zone Selection.** Enterprises can now set up their own time zones on the TCB portal. This new feature is available in the enterprise settings section. The timezone setup will have an impact on the start and end times of campaigns, as well as the start and end times of redemptions. By default, the timezone is set to Pacific/Honolulu.
+# TCB V4.0.1 - Release Notes - 8th May, 2023
+
+We have released a minor version update that includes the following:
+
+1.  Integration of Freshdesk support chat in the TCB portal to report any issues.
     
-2.  **PLU Purchase Requirements.** Currently, retailers are unable to create coupons for their custom-branded items or vegetables for which they maintain PLUs, Class, and Department, as the Master Offer File does not support these features. However, a new feature has been added that enables retailers to create custom MOF files specific to their needs by including PLU, Class, and Department support.
+2.  Creation of a Freshdesk ticket internally by TCB upon receiving an issue report via the chat integration.
     
-3.  **Saved-offer Sharing.**  A new sharing feature has been added that allows users to save their coupons in multiple apps, making them accessible from different apps. This feature will be beneficial during redemption, as users can access their coupons from various sources.
+3.  Display Open/Pending/Resolved tickets in the TCB portal under the Tickets tab.
     
-4.  **Customized Rededmption Timing.** A new feature has been added that enables manufacturers to configure specific days of the week, dates in the month, and time windows during which a campaign can be redeemed. For instance, redemption may only be allowed on weekends from 8 AM to 2 PM and on the 15th of every month. This feature provides manufacturers with the ability to set up these restrictions for redemption.
+4.  Access to the conversations happening in each ticket.
     
-5.  **Expanded Distribution Capacity.** A new feature has been added that allows providers to manage up to 100 million unique codes and configure them with serialized GS1s. These codes can be sent to consumers through any channel, and the provider can specify a custom validity period before sending them. To use this feature, providers must have a 3-digit provider prefix. If your provider prefix is currently 4 digits, please inform us so that we can change it to 3 digits. Changing the prefix code will not affect any previously deposited coupons, only newly deposited coupons will be affected.
+5.  Addition of two new APIs, namely /tickets and /tickets/{id}/conversations, in the common API section to extract information and integrate with your own ticketing system.
     
-6.  **Webhooks.** The webhook infrastructure has been updated and thoroughly tested with billions of webhook messages sent to a test endpoint. In addition, events can now be configured per webhook, allowing customers to direct specific events to specific endpoints. For example, an enterprise might want MOF update events to go to URL1 and deposit events to go to URL2. These events provide more flexibility and control over the webhook process.
+6.  We have added a new API, namely POST /ticket, to the common API section. With this API, customers can create or raise issues in the TCB portal.
     
-7.  **Pagination for MOF APIs.** The master offer files API for Manufacturers and Authorized partners now supports pagination, as does the My Authorized master offer files API for providers. This means that customers with a large number of master offer files can now fetch the data in a paginated manner from the TCB backend, making it more efficient and manageable.
-    
-8.  **Connected Retailers API.** We have introduced a new live retailer API that allows providers to retrieve the retailer name, logo, and image from the TCB platform. This can be used to create an interface in their app, showing where 8112 is accepted. As TCB is gradually enabling retailers, this feature is crucial.
-    
-9.  **MOF report redemption date filtering.** We have added a new feature in the manufacturer's Master Offer File report that allows filtering by redemption date. Previously, the report was filtered based on deposit time, but the issue was that the serialized gs1s could be redeemed at any time after the deposit. To get the updated record with the redemption time, you needed to download the report every time from the beginning. Now, with the new feature, you can continuously fetch the report using deposit time in a paginated manner and also fetch the redemption report in a paginated manner in parallel so that you can avoid downloading the MOF report from the beginning every time.
-    
-10.  **UPC and EAN validation checks.** We have made improvements to the purchase requirement feature by adding GTIN validation for UPC and EAN check digits. Now, there are two separate data fields for each purchase requirement - one for 12 digit UPCs where TCB will check the validity of the 12th check digit, and the other for 13-digit EANs where TCB will check the validity of the 13th check digit. This will ensure that TCB is maintaining and exchanging accurate data from the outset of the process. When sending the purchase requirement data to the retail point-of-sale systems, check digits will be stripped off by default. However, if a retailer utilizes check digits in their platform, they can use a flag called 'include_check_digit' during the redemption flow to let TCB know that removal of the check digit is not required for that particular retailer.
-    
-11.  **Deprecation Warning - Wallet Integration API**: The Wallet Integration API has been renamed as Authentication (VC) API. This API acts as a proxy layer for retrieving the verifiable credential from TCB's preferred identity partner, Spectiv Labs. TCB suggests that enterprises using VC for advanced coupon use cases, such as age verification, obtain the VC directly from Spectiv API instead of TCB's proxy. This is because the proxy layer adds latency to the API call, as each call needs to be proxied to Spectiv via TCB. Additionally, any integration issue between TCB and Spectiv layers could create an unpleasant customer experience, for which both parties would be responsible. By connecting directly to Spectiv, customers can benefit from lower latency and direct support from Spectiv, including an SLA. However, when using the proxy layer, as two parties are involved, there will be no SLA for these APIs.
-    
-12.  **Deprecation Warning - All wallet APIs**: The use of all wallets API will be phased out. Instead, providers can use a single app called Gitsy to join the 8112 ecosystems without any additional technical requirements seamlessly. Providers who do not wish to upgrade their technology can work with TCB's recommended identity solution provider, Spectiv Labs, to obtain a verifiable credential (VC) and direct deposit their content into the Gitsy app using the VC. For other providers, sharing paths and phone hash will still be available for moving content. We have made this API hidden in this release, but it will eventually be phased out. TCB recommends enterprises to directly work with Spectiv Labs to get the VC from them and use the VC in the TCB ecosystem to enable advanced coupon execution during deposit.
-    
-13.  **Accelerator/Retailer Managed Services.** We have introduced a new feature that allows accelerators to include and manage their retailers on the TCB platform. This is particularly helpful for small and medium retailers, or long tail retailers, and allows accelerators to offer a managed service to their connected retailers.
-    
-14.  **Partner/Manufacturer Managed Services.** We have introduced a new functionality for sub-manufacturers that enables authorized partners to offer managed services to their small and medium-sized manufacturers who may not wish to create their own accounts on the TCB platform.
-    
-15.  **Retailer-specific Offers.** We have introduced a new feature called "restricted retailer redemption", which allows manufacturers to limit the redemption of serialized GS1s of a Master Offer File (MOF) to a specific set of retailers. This feature enables manufacturers to create retailer-specific MOFs.
-    
-16.  **Report Status API**  - A new API has been added to the Common API called the Report Status API. TCB's report generation process is asynchronous, as the generated CSV file can potentially have millions of entries for highly engaged MOFs. When a user requests a report with specific parameters, TCB creates a job and returns a job ID. This job will eventually be completed, resulting in a set of CSV files being generated and saved into S3, and the report will be sent via webhook. However, if you're not implementing a webhook, you can use this new API to check the status of the job. Once the job is completed, the API will provide you with a list of the generated CSV files, along with download links.
-    
-17.  **Include a redemption filter in the MOF distribution report with redemption**  - The MOF distribution report with redemption currently has a limitation as it filters serialized gs1 based on the distribution date, which means that coupons redeemed after that date won't be included in the report. To get the updated redemption information, customers would have to fetch the entire MOF report, which is not an optimized process. To address this, we are adding a new filter to the MOF report for manufacturers and authorized partners, allowing them to fetch the report using a redemption date filter. This will help optimize the process of getting the updated redemption information.
-    
-18.  **Include the ability to check if a user has installed the app or not in the All Participating App API**  - To ensure efficient sharing, providers would like to confirm if the user has the sharing app installed on their device before initiating the content-sharing process. For this purpose, TCB requires an unauthenticated API from the sharing app that can verify the installation status. This API will accept an encrypted phone hash and return a fixed response format, either {'installed': 'yes'} or {'installed': 'no'} with HTTP status code 200. This API endpoint will be available in the All Participating App API response.
-    
-19.  **The sharing app will have the capability to inform the provider's server of the successful receipt of the shared content**  - Providers have the option to set up a notification endpoint that sharing apps can use to inform the provider's server about the successful receipt of serialized gs1s outside of TCB.
-    
-20.  **Exclude GTINs / PLUs / Department list in Master Offer File -** The feature of excluding GTIN/UPC/PLU from the master offer file is currently restricted to Japan and has not been activated for the US yet.
+
+Screenshots below.
+
+![](https://ik.imagekit.io/launchnotes/production/zmxjmi2lfg64z1lu8r0pi7mmmmp3#t=0.1)
+
+----------
+
+![](https://ik.imagekit.io/launchnotes/production/hqgpb7hsbcwd8cfm8lfvwsd2f30k#t=0.1)
+
+----------
+
+![](https://ik.imagekit.io/launchnotes/production/op7zfpbyaoxd2tb76hc6ni8jcbe8#t=0.1)
+
+----------
+
+![](https://ik.imagekit.io/launchnotes/production/w9p00vhjv2e9xi10tngl5pjhohyr#t=0.1)
+
+----------
+
+![](https://ik.imagekit.io/launchnotes/production/ofmu834qk95tu3bdu3lhpcd14t3c#t=0.1)
+
+----------
+
+![](https://ik.imagekit.io/launchnotes/production/zzkhhvg89cyxs6wp7e8anfkt47cv#t=0.1)
+
+[P](https://www.launchnotes.com/?utm_announcement=ann_Sivt2nY80MxU4&utm_campaign=https%3A%2F%2Fupdate.thecouponbureau.org%2F&utm_content=project-announcement-index&utm_medium=powered-by&utm_source=in-app)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzY3NDMyMTI5LC0xMTI0ODYyNzU2LC0xMj
-g0MTM1NTc1LDEzMjk5MzEyNTIsLTgzODA5NDEzMywtMTMyNzA4
-NjUzMCwtMTUwMDIzMjEzNSw5MTYyMjYwOTQsLTE3Njk1MzYxND
-YsLTE2MDMxNDgwNTMsLTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01
-Mjg5NjU0NDksLTcxNzI2MDI3OCwxMTYwMTMxOTM2LDE1MTY2ND
-Y0NzcsNDA5ODQwODg0LC05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbMTMxMDIxNjk4MCwzNjc0MzIxMjksLTExMj
+Q4NjI3NTYsLTEyODQxMzU1NzUsMTMyOTkzMTI1MiwtODM4MDk0
+MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIyNjA5NC
+wtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2NDM5LDIw
+MzE5OTY5ODMsLTUyODk2NTQ0OSwtNzE3MjYwMjc4LDExNjAxMz
+E5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQsLTkyMjQzNDU5Nl19
+
 -->
