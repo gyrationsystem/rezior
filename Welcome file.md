@@ -1,49 +1,9 @@
-TCB VERSION 4.0.1
 
-# TCB V4.0.1 - Release Notes - 8th May, 2023
-
-We have released a minor version update that includes the following:
-
-1.  Integration of Freshdesk support chat in the TCB portal to report any issues.
+1.  **Bug Fix: E-comm code redemption is not working**  - While providers can create a time-bound e-commerce code, the redemption API is currently rejecting such codes as invalid. This issue is classified as P2 or medium priority, as the affected feature is not currently in use.
     
-2.  Creation of a Freshdesk ticket internally by TCB upon receiving an issue report via the chat integration.
-    
-3.  Display Open/Pending/Resolved tickets in the TCB portal under the Tickets tab.
-    
-4.  Access to the conversations happening in each ticket.
-    
-5.  Addition of two new APIs, namely /tickets and /tickets/{id}/conversations, in the common API section to extract information and integrate with your own ticketing system.
-    
-6.  We have added a new API, namely POST /ticket, to the common API section. With this API, customers can create or raise issues in the TCB portal.
-    
-
-Screenshots below.
-
-![](https://ik.imagekit.io/launchnotes/production/zmxjmi2lfg64z1lu8r0pi7mmmmp3#t=0.1)
-
-----------
-
-![](https://ik.imagekit.io/launchnotes/production/hqgpb7hsbcwd8cfm8lfvwsd2f30k#t=0.1)
-
-----------
-
-![](https://ik.imagekit.io/launchnotes/production/op7zfpbyaoxd2tb76hc6ni8jcbe8#t=0.1)
-
-----------
-
-![](https://ik.imagekit.io/launchnotes/production/w9p00vhjv2e9xi10tngl5pjhohyr#t=0.1)
-
-----------
-
-![](https://ik.imagekit.io/launchnotes/production/ofmu834qk95tu3bdu3lhpcd14t3c#t=0.1)
-
-----------
-
-![](https://ik.imagekit.io/launchnotes/production/zzkhhvg89cyxs6wp7e8anfkt47cv#t=0.1)
-
-[P](https://www.launchnotes.com/?utm_announcement=ann_Sivt2nY80MxU4&utm_campaign=https%3A%2F%2Fupdate.thecouponbureau.org%2F&utm_content=project-announcement-index&utm_medium=powered-by&utm_source=in-app)
+2.  **Bug Fix: Return retailer email_domain in live retailer API**  - Currently, the live retailer API does not provide the retailer identity, which is necessary for manufacturers to apply retailer restrictions in MOF. Therefore, adding the retailer identity in the API is required.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMDIxNjk4MCwzNjc0MzIxMjksLTExMj
+eyJoaXN0b3J5IjpbLTU0Nzg1MTc0NiwzNjc0MzIxMjksLTExMj
 Q4NjI3NTYsLTEyODQxMzU1NzUsMTMyOTkzMTI1MiwtODM4MDk0
 MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIyNjA5NC
 wtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2NDM5LDIw
