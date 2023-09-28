@@ -1,9 +1,8 @@
+**Do not multiply flag default to 1**
 
-1.  **Bug Fix: E-comm code redemption is not working**  - While providers can create a time-bound e-commerce code, the redemption API is currently rejecting such codes as invalid. This issue is classified as P2 or medium priority, as the affected feature is not currently in use.
-    
-2.  **Bug Fix: Return retailer email_domain in live retailer API**  - Currently, the live retailer API does not provide the retailer identity, which is necessary for manufacturers to apply retailer restrictions in MOF. Therefore, adding the retailer identity in the API is required.
+To maintain the desired behavior according to the specification, the default value of the "Do not multiply" flag should be set to 1. This means that if no value is entered, the serialized GS1 can be multiplied. If a value of 1 is provided, it indicates that the coupon cannot be multiplied. Therefore, when creating the MOF (Manufacturer's Order Form), setting the default value to 1 will ensure that the intended behavior is preserved.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU0Nzg1MTc0NiwzNjc0MzIxMjksLTExMj
+eyJoaXN0b3J5IjpbMjEyMTQyNzk1NywzNjc0MzIxMjksLTExMj
 Q4NjI3NTYsLTEyODQxMzU1NzUsMTMyOTkzMTI1MiwtODM4MDk0
 MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIyNjA5NC
 wtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2NDM5LDIw
