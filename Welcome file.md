@@ -1,8 +1,13 @@
-**Do not multiply flag default to 1**
 
-To maintain the desired behavior according to the specification, the default value of the "Do not multiply" flag should be set to 1. This means that if no value is entered, the serialized GS1 can be multiplied. If a value of 1 is provided, it indicates that the coupon cannot be multiplied. Therefore, when creating the MOF (Manufacturer's Order Form), setting the default value to 1 will ensure that the intended behavior is preserved.
+**Add an optional description field in funder**
+
+This becomes particularly valuable when one brand acquires another, providing a clear means of differentiation between the funder and the acquired entity through the utilization of descriptive attributes.
+
+**Ability to mark a funder a test funder**
+
+On certain occasions, manufacturers may need to assess an 8112 coupon in a production environment using a mock funder ID. This flag allows manufacturers to designate the funder as a test entity, ensuring its invisibility to the clearinghouse.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEyMTQyNzk1NywzNjc0MzIxMjksLTExMj
+eyJoaXN0b3J5IjpbLTg3MTU1NDg5MywzNjc0MzIxMjksLTExMj
 Q4NjI3NTYsLTEyODQxMzU1NzUsMTMyOTkzMTI1MiwtODM4MDk0
 MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMTM1LDkxNjIyNjA5NC
 wtMTc2OTUzNjE0NiwtMTYwMzE0ODA1MywtOTkxMTI2NDM5LDIw
