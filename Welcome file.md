@@ -1,8 +1,8 @@
-#### The Coupon Bureau® Provider API
+#### The Coupon Bureau® Accelerator API
 
-Provider APIs allow a coupon provider to deposit/ delete a serialized GS1 (the GS1 distributed to a consumer) at the time of distribution into a manufacturer’s TCB account. These APIs are required for a provider to participate with TCB. Note: A provider will only be able to deposit serialized GS1s into Master Offer Files of those manufacturers who have authorized them.
+Accelerators will facilitate retailer connectivity to The Coupon Bureau Positive Offer File. The Coupon Bureau will authorize an Accelerator to execute coupon redemption/ rollback on behalf of multiple retailers. Retailers will use this accelerator connectivity as their connection to The Coupon Bureau Positive Offer File (POF).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxOTMyMjkxMiwtMTk3MjY4OTM2NCwzNj
+eyJoaXN0b3J5IjpbMTM3MTI2MzY3OCwtMTk3MjY4OTM2NCwzNj
 c0MzIxMjksLTExMjQ4NjI3NTYsLTEyODQxMzU1NzUsMTMyOTkz
 MTI1MiwtODM4MDk0MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMT
 M1LDkxNjIyNjA5NCwtMTc2OTUzNjE0NiwtMTYwMzE0ODA1Mywt
