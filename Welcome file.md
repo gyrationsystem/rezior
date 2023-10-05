@@ -1,13 +1,12 @@
-#### The Coupon Bureau® Authorized Partner API
+#### The Coupon Bureau® Provider API
 
-
-Authorized Partner APIs allow the ability to connect to the TCB from your internal systems so that you can directly deposit and manage an 8112 offer into a manufacturer’s TCB account. APIs are NOT required for a Authorized Partner to reform your functions as they relate to The Coupon Bureau, these APIs are designed specifically for partners who are looking to integrate these functions into your own system.
+Provider APIs allow a coupon provider to deposit/ delete a serialized GS1 (the GS1 distributed to a consumer) at the time of distribution into a manufacturer’s TCB account. These APIs are required for a provider to participate with TCB. Note: A provider will only be able to deposit serialized GS1s into Master Offer Files of those manufacturers who have authorized them.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTc3OTg1ODgsLTE5NzI2ODkzNjQsMz
-Y3NDMyMTI5LC0xMTI0ODYyNzU2LC0xMjg0MTM1NTc1LDEzMjk5
-MzEyNTIsLTgzODA5NDEzMywtMTMyNzA4NjUzMCwtMTUwMDIzMj
-EzNSw5MTYyMjYwOTQsLTE3Njk1MzYxNDYsLTE2MDMxNDgwNTMs
-LTk5MTEyNjQzOSwyMDMxOTk2OTgzLC01Mjg5NjU0NDksLTcxNz
-I2MDI3OCwxMTYwMTMxOTM2LDE1MTY2NDY0NzcsNDA5ODQwODg0
-LC05MjI0MzQ1OTZdfQ==
+eyJoaXN0b3J5IjpbMjAxOTMyMjkxMiwtMTk3MjY4OTM2NCwzNj
+c0MzIxMjksLTExMjQ4NjI3NTYsLTEyODQxMzU1NzUsMTMyOTkz
+MTI1MiwtODM4MDk0MTMzLC0xMzI3MDg2NTMwLC0xNTAwMjMyMT
+M1LDkxNjIyNjA5NCwtMTc2OTUzNjE0NiwtMTYwMzE0ODA1Mywt
+OTkxMTI2NDM5LDIwMzE5OTY5ODMsLTUyODk2NTQ0OSwtNzE3Mj
+YwMjc4LDExNjAxMzE5MzYsMTUxNjY0NjQ3Nyw0MDk4NDA4ODQs
+LTkyMjQzNDU5Nl19
 -->
